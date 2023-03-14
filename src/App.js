@@ -5,10 +5,10 @@ const mock = [
   {
     "id": 16,
     "name": "Amish Cyborg",
-    "status": "Dead",
-    "species": "Alien",
-    "type": "Parasite",
-    "gender": "Male",
+    "status": " Dead ",
+    "species": "Alien ",
+    "type": " Parasite ",
+    "gender": " Male ",
     "origin": {
     "name": "unknown",
     "url": ""
@@ -26,25 +26,34 @@ const mock = [
   }
 ]
 
+
+
 function App() {
   // aqui a baixo não é nativo do react, então tem que importar
-  const [ conteudo, setConteudo ] = useState(<>oi</>)
+  const [ conteudo, setConteudo ] = useState(<></>)
 
   function carregarTodosOsPersonagens(){
     return mock
+    
   }
 
   function listaPersonagens(){
     const todosPersonagens = carregarTodosOsPersonagens()
 
+    
     return todosPersonagens.map(personagem =>
       <div className='card char'>
         <img src={personagem.image}/>
-        { personagem.name}
-        { personagem.status}
-        { personagem.species}
-        { personagem.type }
-        { personagem.gender }
+        <div className='name'>{ personagem.name}</div>
+        <div className='info'>
+          
+          { personagem.status}
+          { personagem.species}
+          { personagem.type }
+          { personagem.gender }
+         
+        </div>
+        
 
       
       </div>

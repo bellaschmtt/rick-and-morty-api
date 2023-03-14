@@ -78,9 +78,25 @@ a:hover {
   background-color: rgb(60, 62, 68);
   border-radius: 20px;
   margin-bottom: 20px;
-  /* flex-direction: column; */
+  /* flex-direction: column;
+  justify-content: center; */
   
 }
+.info{
+  left: 110px;
+  position: relative;
+  align-items: center;
+  list-style: none;
+  width: 50px;
+  padding: 10px;
+  flex-direction: column;
+  display: flex;
+}
+.name{
+  font-weight: bold;
+  
+}
+
 
 .char {
   width: 20%;
