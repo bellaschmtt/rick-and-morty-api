@@ -68,3 +68,24 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+aula do Renan - yarn start - se der erro
+
+npm start - se não tiver instalado - npm i
+
+npm start
+npm i
+
+
+fetch() - assincrono
+
+await - "é espera eu"
+
+async - para torna tudo assincrono
+
+para completar o
+
+
+-------------------
+Da aula de hoje 20/03 botamos todos os personagens na tela - aula que vem boatar todas as participações dos personagens nos ep. 
