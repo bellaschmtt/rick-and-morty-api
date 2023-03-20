@@ -32,36 +32,46 @@ function App() {
   // aqui a baixo não é nativo do react, então tem que importar
   const [ conteudo, setConteudo ] = useState(<></>)
 
-  function carregarTodosOsPersonagens(){
-    return mock
+  async function carregarTodosOsPersonagens(){
+    const retorno = await fetch(
+      "https://rickandmortyapi.com/api/character",
+      {method: "GET"}
+    )
+    .then((response) => response.json())
+    console.log(retorno)
+    return retorno.results
     
   }
 
-  function listaPersonagens(){
-    const todosPersonagens = carregarTodosOsPersonagens()
+  async function listaPersonagens(){
+    const todosPersonagens = await carregarTodosOsPersonagens()
 
     
     return todosPersonagens.map(personagem =>
       <div className='card char'>
         <img src={personagem.image}/>
         <div className='name'>{ personagem.name}</div>
-        <div className='info'>
-          
-          { personagem.status}
-          { personagem.species}
-          { personagem.type }
-          { personagem.gender }
-         
-        </div>
+        <p>{ personagem.status}</p> 
+        <p>{ personagem.species}</p>  
+        <p>{ personagem.type }</p>
+        <p>{ personagem.gender }</p>
         
-
+        <div className='char-info'>
+          <spam>
+            <b>Nome:</b>
+             { personagem.name}
+          </spam>
+        </div>
       
       </div>
     )
   }
   useEffect(() =>{
-    setConteudo(listaPersonagens())
-  })
+    async function carregar(){
+      setConteudo(await listaPersonagens())
+    }  
+    carregar()
+  }, []);
 
   return (
     <div className="App">
