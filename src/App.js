@@ -9,6 +9,7 @@ const mock = [
     "species": "Alien ",
     "type": " Parasite ",
     "gender": " Male ",
+    "episode": "S01E01",
     "origin": {
     "name": "unknown",
     "url": ""
@@ -29,6 +30,42 @@ const mock = [
 
 
 function App() {
+
+  function traduzirStatus(status){
+    switch(status){
+      case 'Alive':
+        return "vivo"
+      case 'unknown':
+        return 'Desconhcido' 
+      case 'Dead':
+        return 'morto' 
+      default:
+        return status
+    }
+  }
+
+  function traduzirGender(gender){
+    switch(gender){
+      case 'Male':
+        return "macho"
+      case 'Female':
+        return 'femea' 
+      case 'unknown':
+        return 'desconhecido' 
+      default:
+        return gender
+    }
+  }
+  function traduzirSpecies(species){
+    switch(species){
+      case 'Human':
+        return "humano"
+      default:
+        return species
+    }
+  }
+  
+
   // aqui a baixo não é nativo do react, então tem que importar
   const [ conteudo, setConteudo ] = useState(<></>)
 
@@ -51,10 +88,14 @@ function App() {
       <div className='card char'>
         <img src={personagem.image}/>
         <div className='name'>{ personagem.name}</div>
-        <p>{ personagem.status}</p> 
-        <p>{ personagem.species}</p>  
-        <p>{ personagem.type }</p>
-        <p>{ personagem.gender }</p>
+        <p>{traduzirStatus (personagem.status)}</p> 
+        <p>{traduzirSpecies( personagem.species)}</p>  
+        <p>{traduzirGender( personagem.gender) }</p>
+        <p>{ personagem.episode.map(ep =>(
+          <spam key={personagem.name+(ep.split('episode/')[1])}>
+            Ep-{(ep.split('episode/')[1])}
+          </spam>
+        ))}</p>
         
         <div className='char-info'>
           <spam>
