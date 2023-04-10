@@ -62,10 +62,22 @@ function App() {
         return species;
     }
   }
+    function montarFiltro(tipo, valor){
+      const filtros = new URLSearchParams(busca);
+
+      const retorno = filtros.get(tipo);
+      if(retorno === valor){
+        filtros.delete(tipo);
+      }else{
+      filtros.set(tipo, valor);
+      }
+
+      setBusca('?'+filtros.toString());
+    }
 
   // aqui a baixo não é nativo do react, então tem que importar
   const [conteudo, setConteudo] = useState(<></>);
-
+  // o "await" é basicamente espera a função terminar para continuar
   async function carregarTodosOsPersonagens() {
     const retorno = await fetch(
       "https://rickandmortyapi.com/api/character" + busca,
@@ -74,7 +86,8 @@ function App() {
     console.log(retorno);
     return retorno.results;
   }
-
+  // comunicação sincrona é tudo que funciona que só na mesma hora como as aula
+  // comunicação assincrona é tudo que funciona que não precisa esperar a resposta para continuar
   async function listaPersonagens() {
     const todosPersonagens = await carregarTodosOsPersonagens();
 
@@ -88,44 +101,37 @@ function App() {
             {personagem.name}
           </spam>
         </div>
-        <br></br>
+        <hr></hr>
         <div className="char-info">
           <spam>
             <b>Status: </b>
             {traduzirStatus(personagem.status)}
           </spam>
         </div>
-        <br></br>
+        <hr></hr>
         <div className="char-info">
           <spam>
             <b>Espécies: </b>
             {traduzirStatus(personagem.species)}
           </spam>
         </div>
-        <br></br>
+        <hr></hr>
         <div className="char-info">
           <spam>
             <b>Gênero: </b>
             {traduzirStatus(personagem.gender)}
           </spam>
         </div>
-        <br></br>
-
-        <p>
+        <hr></hr>
+        <p className="lista-secundaria">
           {personagem.episode.map((ep) => (
-            <spam key={personagem.name + ep.split("episode/")[1]}>
-              Ep- {ep.split("episode/")[1]},
+            <spam key={personagem.name + ep.split("episode/")[1]}> 
+              Ep-{ep.split( "episode/")[1]}, {""}
             </spam>
           ))}
         </p>
 
-        <p>
-          {personagem.episode.map((ep) => (
-            <spam key={personagem.name + ep.split("episode/")[1]}>
-              Ep- {ep.split("episode/")[1]},
-            </spam>
-          ))}
-        </p>
+        
       </div>
     ));
   }
@@ -155,6 +161,11 @@ function App() {
           <span onClick={() => setBusca("?gender=female")}>Feminino</span>
           <span onClick={() => setBusca("?gender=unknown")}>Desconhecido</span>
         </div>
+        <div className="filtro genero">
+          <b>Filtro duplo:</b>
+          <span onClick={() => montarFiltro('status' , 'dead')}>teste</span>
+         
+        </div>
         <div className="filtro especies">
           <b>Espécies:</b>
           <span onClick={() => setBusca("?species=human")}>Humano</span>
@@ -167,9 +178,7 @@ function App() {
             Mythological Creature
           </span>
           <span onClick={() => setBusca("?species=animal")}>Animal</span>
-          <span onClick={() => setBusca("?species=Cronenberg")}>
-            Cronenberg
-          </span>
+          <span onClick={() => setBusca("?species=Cronenberg")}>Cronenberg</span>
           <span onClick={() => setBusca("?species=Robot")}>Robot</span>
         </div>
       </div>
